@@ -36,15 +36,18 @@ public class MessageQueueConstants {
 	 * 默认作为延时功能的死信消息转发的接收队列名称
 	 */
 	public static final String DEFAULT_REPEAT_TRADE_QUEUE_NAME = "default.repeat.trade.queue";
-	
-	
+
+	/**
+	 * 活动消息队列名称
+	 */
+	public static final String ACTIVITY_DEFAULT_WEB_QUEUE_NAME = "activity.default.service.queue.name";
 	
 	/**
 	 * hello消息队列名称
 	 */
 	public static final String QUEUE_HELLO_NAME = "app.queue.hello";
-	
-	
+
+
 	/**
 	 * 测试多线程消费队列名称
 	 */

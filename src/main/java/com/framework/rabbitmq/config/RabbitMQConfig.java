@@ -53,6 +53,7 @@ public class RabbitMQConfig {
 
     /**
      * 默认及时消息交换机
+     *
      * @return DirectExchange
      */
     @Bean("defaultDirectExchange")
@@ -63,6 +64,7 @@ public class RabbitMQConfig {
 
     /**
      * 默认广播交换机对象
+     *
      * @return FanoutExchange
      */
     @Bean("defaultFanoutExchange")
@@ -73,6 +75,7 @@ public class RabbitMQConfig {
 
     /**
      * 默认topic路由方式交换机
+     *
      * @return TopicExchange
      */
     @Bean("defaultTopicExchange")
@@ -83,6 +86,7 @@ public class RabbitMQConfig {
 
     /**
      * 默认headers交换机
+     *
      * @return HeadersExchange
      */
     @Bean("defaultHeadersExchange")
@@ -93,14 +97,15 @@ public class RabbitMQConfig {
 
     /**
      * 默认延迟消息死信队列
+     *
      * @return Queue
      */
     @Bean
     public Queue defaultDeadLetterQueue() {
         Map<String, Object> arguments = new HashMap<>();
-        arguments.put("x-dead-letter-exchange",MessageQueueConstants.DEFAULT_DIRECT_EXCHANGE_NAME);//设置交换机路由
+        arguments.put("x-dead-letter-exchange", MessageQueueConstants.DEFAULT_DIRECT_EXCHANGE_NAME);//设置交换机路由
         arguments.put("x-dead-letter-routing-key", MessageQueueConstants.DEFAULT_REPEAT_TRADE_QUEUE_NAME);//设置转发队列名称
-        return new Queue(MessageQueueConstants.DEFAULT_DEAD_LETTER_QUEUE_NAME,true,false,false,arguments);
+        return new Queue(MessageQueueConstants.DEFAULT_DEAD_LETTER_QUEUE_NAME, true, false, false, arguments);
     }
 
     @Bean
@@ -111,16 +116,27 @@ public class RabbitMQConfig {
 
     /**
      * 默认延迟消息死信接受转发消息队列
+     *
      * @return Queue
      */
     @Bean
     public Queue defaultRepeatTradeQueue() {
-        return new Queue(MessageQueueConstants.DEFAULT_REPEAT_TRADE_QUEUE_NAME,true,false,false);
+        return new Queue(MessageQueueConstants.DEFAULT_REPEAT_TRADE_QUEUE_NAME, true, false, false);
     }
 
 
     @Bean
     public Binding defaultRepeatTradeBinding() {
         return BindingBuilder.bind(defaultRepeatTradeQueue()).to(defaultDirectExchange()).with(MessageQueueConstants.DEFAULT_REPEAT_TRADE_QUEUE_NAME);
+    }
+
+    @Bean
+    public Queue activityDefaultQueue() {
+        return new Queue(MessageQueueConstants.ACTIVITY_DEFAULT_WEB_QUEUE_NAME, true, false, false);
+    }
+
+    @Bean
+    public Binding activityDefaultBinding() {
+        return BindingBuilder.bind(activityDefaultQueue()).to(defaultDirectExchange()).with(MessageQueueConstants.ACTIVITY_DEFAULT_WEB_QUEUE_NAME);
     }
 }

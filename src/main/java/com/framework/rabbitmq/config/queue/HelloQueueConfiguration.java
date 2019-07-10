@@ -12,25 +12,25 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * hello队列配置
- * @author victor
  *
+ * @author victor
  */
 @Configuration
 public class HelloQueueConfiguration {
 
-	@Autowired
-	@Qualifier("defaultDirectExchange")
-	private DirectExchange exchange;
+    @Autowired
+    @Qualifier("defaultDirectExchange")
+    private DirectExchange exchange;
 
 
-	@Bean
-	public Queue helloQueue() {
-		return new Queue(MessageQueueConstants.QUEUE_HELLO_NAME,true,false,false);
-	}
+    @Bean
+    public Queue helloQueue() {
+        return new Queue(MessageQueueConstants.QUEUE_HELLO_NAME, true, false, false);
+    }
 
-	@Bean
-	public Binding helloBinding() {
-		return BindingBuilder.bind(helloQueue()).to(exchange).with(MessageQueueConstants.QUEUE_HELLO_NAME);
-	}
+    @Bean
+    public Binding helloBinding() {
+        return BindingBuilder.bind(helloQueue()).to(exchange).with(MessageQueueConstants.QUEUE_HELLO_NAME);
+    }
 
 }
