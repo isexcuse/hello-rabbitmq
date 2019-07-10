@@ -29,7 +29,7 @@ public class QueueMessage<T> implements Serializable {
      */
     private long expiration;
 
-    public QueueMessage() {
+    private QueueMessage() {
 
     }
 
